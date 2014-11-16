@@ -1,0 +1,46 @@
+{
+  "name": "gulp-deleted",
+  "description": "The gulp plugin `gulp-deleted` allows you to remove files from the destination folder which do no exist in the stream",
+  "version": "0.0.0",
+  "author": {
+    "name": "Oliver Foster",
+    "email": "oliver.foster@kineo.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oliverfoster/gulp-deleted.git"
+  },
+  "main": "lib/index.js",
+  "engines": {
+    "node": "*"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "http://github.com/oliverfoster/gulp-deleted/raw/master/LICENSE"
+  },
+  "dependencies": {
+    "del": "^0.1.3",
+    "glob-all": "^3.0.1",
+    "minimatch": "~0.2.14",
+    "through": "~2.3.4",
+    "underscore": "^1.7.0"
+  },
+  "keywords": [
+    "gulp",
+    "gulpplugin",
+    "minimatch",
+    "clean",
+    "dest",
+    "pipe"
+  ],
+  "bugs": {
+    "url": "https://github.com/oliverfoster/gulp-deleted/issues"
+  },
+  "homepage": "https://github.com/oliverfoster/gulp-deleted",
+  "maintainers": [
+    {
+      "name": "Oliver Foster",
+      "email": "oliver.foster@kineo.com"
+    }
+  ]
+}
