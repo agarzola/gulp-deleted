@@ -10,7 +10,7 @@ var destPath = "/path/dest"
 var srcPaths = ["/path/src/**/assets/**/*"];
 gulp.src( srcPaths )
 	.pipe( collate("assets") )
-	.pipe( deleted(, [
+	.pipe( deleted(destPath, [
 			"/path/dest/**/*",
 			"!/path/dest/index.html",
 			"!/path/dest/css/**/*",
