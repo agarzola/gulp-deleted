@@ -7,6 +7,7 @@ Best used in conjunction with [gulp-collate](https://www.npmjs.org/package/gulp-
 
 ```  
 var destPath = "/path/dest"
+var srcPaths = ["/path/src/**/assets/**/*"];
 gulp.src( srcPaths )
 	.pipe( collate("assets") )
 	.pipe( deleted(, [
