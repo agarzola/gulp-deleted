@@ -1,7 +1,7 @@
 {
   "name": "gulp-deleted",
   "description": "The gulp plugin `gulp-deleted` allows you to remove files from the destination folder which do no exist in the stream",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Oliver Foster",
     "email": "oliver.foster@kineo.com"
