@@ -21,7 +21,6 @@
   "dependencies": {
     "del": "^0.1.3",
     "glob-all": "^3.0.1",
-    "minimatch": "~0.2.14",
     "through": "~2.3.4",
     "underscore": "^1.7.0"
   },
@@ -39,8 +38,25 @@
   "homepage": "https://github.com/oliverfoster/gulp-deleted",
   "maintainers": [
     {
-      "name": "Oliver Foster",
+      "name": "oliver.foster",
       "email": "oliver.foster@kineo.com"
     }
-  ]
+  ],
+  "gitHead": "3ee77bef6af21930ecc438e44ea4c62a0ade9a17",
+  "_id": "gulp-deleted@0.0.1",
+  "scripts": {},
+  "_shasum": "502a94f7fcb7cb78fbc238a53dea572d52efb9d1",
+  "_from": "gulp-deleted@",
+  "_npmVersion": "1.4.28",
+  "_npmUser": {
+    "name": "oliver.foster",
+    "email": "oliver.foster@kineo.com"
+  },
+  "dist": {
+    "shasum": "502a94f7fcb7cb78fbc238a53dea572d52efb9d1",
+    "tarball": "http://registry.npmjs.org/gulp-deleted/-/gulp-deleted-0.0.1.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/gulp-deleted/-/gulp-deleted-0.0.1.tgz",
+  "readme": "ERROR: No README data found!"
 }
