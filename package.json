@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/oliverfoster/gulp-deleted.git"
+    "url": "git://github.com/agarzola/gulp-deleted.git"
   },
   "main": "lib/index.js",
   "engines": {
@@ -16,7 +16,7 @@
   },
   "license": {
     "type": "MIT",
-    "url": "http://github.com/oliverfoster/gulp-deleted/raw/master/LICENSE"
+    "url": "http://github.com/agarzola/gulp-deleted/raw/master/LICENSE"
   },
   "dependencies": {
     "del": "^0.1.3",
@@ -33,13 +33,13 @@
     "pipe"
   ],
   "bugs": {
-    "url": "https://github.com/oliverfoster/gulp-deleted/issues"
+    "url": "https://github.com/agarzola/gulp-deleted/issues"
   },
-  "homepage": "https://github.com/oliverfoster/gulp-deleted",
+  "homepage": "https://github.com/agarzola/gulp-deleted",
   "maintainers": [
     {
-      "name": "oliver.foster",
-      "email": "oliver.foster@kineo.com"
+      "name": "Alfonso Gómez-Arzola",
+      "email": "alfonso@chromatichq.com"
     }
   ],
   "gitHead": "3ee77bef6af21930ecc438e44ea4c62a0ade9a17",
