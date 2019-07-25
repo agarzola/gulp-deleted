@@ -1,18 +1,34 @@
 # gulp-deleted
 
-The gulp plugin `gulp-deleted` allows you to remove files from the destination folder which do no exist in the source stream (with exclusions);
-  
-Best used in conjunction with [gulp-collate](https://www.npmjs.org/package/gulp-collate) and [gulp-changed](https://www.npmjs.org/package/gulp-changed)  
+`gulp-deleted` allows you to remove files from the destination folder which do
+not exist in the source stream. You can specify a globs with which to identify
+destination files that are eligible for deletion, including exlusions.
 
-``` 
-var srcPaths = [ "src/**/assets/**/*" ]
-var destPath = "dest/"
-gulp.src( srcPaths )
-	.pipe( collate("assets") )
-	.pipe( deleted( destPath , [
-			"**/*",
-			"!index.html"
-		]))
-	.pipe( changed(destPath) )
-	.pipe( gulp.dest( destPath ) );
+## Remove any files from the destination that are no longer in source.
+```javascript
+function assets() {
+  const src = 'src/assets/**/*';
+  const dest = 'dest/';
+  gulp.src(src)
+    .pipe(deleted({ src, dest, patterns: [ '**/*' ] }))
+    .pipe(gulp.dest(destPath));
+}
+```
+
+## Keep `index.html` in the destination even if it doesn’t exist in the source.
+```javascript
+function assets() {
+  const src = 'src/assets/**/*';
+  const dest = 'dest/';
+  gulp.src(src)
+    .pipe(deleted({
+      src,
+      dest,
+      patterns: [
+        '**/*',
+        '!index.html',
+      ],
+    }))
+    .pipe(gulp.dest(destPath));
+}
 ```
