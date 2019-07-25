@@ -2,6 +2,9 @@
   "name": "gulp-deleted",
   "description": "The gulp plugin `gulp-deleted` allows you to remove files from the destination folder which do no exist in the stream",
   "version": "0.0.3",
+  "scripts": {
+    "test": "mocha"
+  },
   "author": {
     "name": "Oliver Foster",
     "email": "oliver.foster@kineo.com"
@@ -44,7 +47,6 @@
   ],
   "gitHead": "3ee77bef6af21930ecc438e44ea4c62a0ade9a17",
   "_id": "gulp-deleted@0.0.1",
-  "scripts": {},
   "_shasum": "502a94f7fcb7cb78fbc238a53dea572d52efb9d1",
   "_from": "gulp-deleted@",
   "_npmVersion": "1.4.28",
@@ -58,5 +60,13 @@
   },
   "directories": {},
   "_resolved": "https://registry.npmjs.org/gulp-deleted/-/gulp-deleted-0.0.1.tgz",
-  "readme": "ERROR: No README data found!"
+  "readme": "ERROR: No README data found!",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "proxyquire": "^2.1.1",
+    "sinon": "^7.3.2",
+    "sinon-chai": "^3.3.0",
+    "vinyl": "^2.2.0"
+  }
 }
