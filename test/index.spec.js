@@ -7,16 +7,10 @@ const File = require('vinyl');
 const through = require('through');
 const proxyquire = require('proxyquire');
 const push = sinon.spy();
-let destinationFiles;
 
 const stubs = {
   del: {
     sync: sinon.spy(),
-  },
-  'glob-all': {
-    sync: (patterns, options) => {
-      return destinationFiles;
-    }
   },
 };
 
@@ -28,25 +22,19 @@ describe('gulp-deleted', () => {
     // Instantiate fresh dummy file and options objects for every test.
     file = new File({
       cwd: process.cwd(),
-      base: '/source/',
-      path: `${process.cwd()}/source/file.jpg`,
+      base: '/test/source/',
+      path: `${process.cwd()}/test/source/file.jpg`,
     });
     nestedFile = new File({
       cwd: process.cwd(),
-      base: '/source/',
-      path: `${process.cwd()}/source/directory/file.jpg`,
+      base: '/test/source/',
+      path: `${process.cwd()}/test/source/directory/file.jpg`,
     });
     options = {
-      src: 'source',
-      dest: 'destination',
+      src: 'test/source',
+      dest: 'test/destination',
       patterns: [ '**/*' ],
     };
-    destinationFiles = [
-      'file.jpg',
-      'directory/file.jpg',
-      'deletedFile.jpg',
-      'directory/deletedFile.jpg',
-    ];
     stubs.del.sync.resetHistory();
   });
 
@@ -73,7 +61,7 @@ describe('gulp-deleted', () => {
   it('should delete files at the root of destination', done => {
     const plugin = deleted(options);
     plugin.once('end', () => {
-      expect(stubs.del.sync).to.be.calledWith(`${process.cwd()}/destination/deletedFile.jpg`);
+      expect(stubs.del.sync).to.be.calledWith(`${process.cwd()}/test/destination/deletedFile.jpg`);
       done();
     });
     plugin.write(file);
@@ -84,7 +72,20 @@ describe('gulp-deleted', () => {
   it('should delete files nested within directories inside destination', done => {
     const plugin = deleted(options);
     plugin.once('end', () => {
-      expect(stubs.del.sync).to.be.calledWith(`${process.cwd()}/destination/directory/deletedFile.jpg`);
+      expect(stubs.del.sync).to.be.calledWith(`${process.cwd()}/test/destination/directory/deletedFile.jpg`);
+      done();
+    });
+    plugin.write(file);
+    plugin.write(nestedFile);
+    plugin.end();
+  });
+
+  it('should not delete ignored files', done => {
+    options.patterns.push('!directory/deletedFile.jpg');
+    const plugin = deleted(options);
+    plugin.once('end', () => {
+      expect(stubs.del.sync).to.be.calledOnce;
+      expect(stubs.del.sync).to.be.calledWith(`${process.cwd()}/test/destination/deletedFile.jpg`);
       done();
     });
     plugin.write(file);
@@ -93,8 +94,19 @@ describe('gulp-deleted', () => {
   });
 
   it('should not delete any files if not required', done => {
-    const plugin = deleted(options);
-    destinationFiles.splice(2);
+    // Require deleted w/stubbed `glob-all` dependency, so mock destination
+    // directory structure where there are no excess files.
+    const deleted2 = proxyquire('../lib', Object.assign({}, stubs, {
+      'glob-all': {
+        sync: () => {
+          return [
+            'file.jpg',
+            'directory/file.jpg',
+          ];
+        }
+      },
+    }));
+    const plugin = deleted2(options);
     plugin.once('end', () => {
       expect(stubs.del.sync).to.not.be.called;
       done();
