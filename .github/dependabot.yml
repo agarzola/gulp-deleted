@@ -5,7 +5,7 @@ updates:
     directory: /
     schedule:
       interval: daily
-      time: 04:47
+      time: '04:47'
     reviewers:
       - agarzola
     assignees:
@@ -17,7 +17,7 @@ updates:
     directory: /
     schedule:
       interval: daily
-      time: 04:47
+      time: '04:47'
     reviewers:
       - agarzola
     assignees:
