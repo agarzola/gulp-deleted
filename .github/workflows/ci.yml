@@ -1,0 +1,40 @@
+---
+name: Tests and Code Analysis
+on:  # yamllint disable-line rule:truthy
+  # Trigger the workflow on pushes to the master branch and all pull requests.
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  node-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        node-version:
+          - 18
+          - 20
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run tests
+        run: yarn test
+
+  yaml-lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: YAML lint
+        uses: ibiqlik/action-yamllint@master
+        with:
+          config_file: .yamllint.yml
