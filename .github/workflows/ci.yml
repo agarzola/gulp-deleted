@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Run tests
-        run: npm test
+        run: yarn test
 
   yaml-lint:
     runs-on: ubuntu-latest
