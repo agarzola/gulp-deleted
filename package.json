@@ -23,7 +23,7 @@
     "url": "http://github.com/agarzola/gulp-deleted/raw/master/LICENSE"
   },
   "dependencies": {
-    "del": "^5.0.0",
+    "del": "^6.1.1",
     "glob-all": "^3.0.1",
     "lodash.difference": "^4.5.0",
     "through": "^2.3.4"
