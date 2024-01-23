@@ -34,3 +34,23 @@ function assets() {
     .pipe(gulp.dest(dest));
 }
 ```
+
+## Transform filenames between source and destination.
+
+```javascript
+function assets() {
+  const src = 'src/assets/**/*';
+  const dest = 'dest/';
+  gulp.src(src)
+    .pipe(deleted({
+      src,
+      dest,
+      patterns: [
+        '**/*',
+      ],
+      // Match `.scss` files in the source to `.css` files in the destination.
+      transform: (filename) => filename.replace(/\.scss$/, '.css'),
+    }))
+    .pipe(gulp.dest(dest));
+}
+```
