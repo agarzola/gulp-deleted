@@ -88,12 +88,17 @@ describe('gulp-deleted', () => {
   it('should not delete files that match after filename transformation', done => {
     const optionsWithFilenameTransform = {
       ...options,
-      transform: (filename) => filename.replace(/\.scss$/, '.css'),
+      transforms: [
+        (filename) => filename.replace(/\.scss$/, '.css'),
+        (filename) => filename.replace(/\.scss$/, '.css.map'),
+      ],
     };
     const plugin = deleted(optionsWithFilenameTransform);
     plugin.once('end', () => {
       expect(stubs.del.sync).to.not.be.calledWith(`${process.cwd()}/test/destination/file.css`);
+      expect(stubs.del.sync).to.not.be.calledWith(`${process.cwd()}/test/destination/file.css.map`);
       expect(stubs.del.sync).to.be.calledWith(`${process.cwd()}/test/destination/directory/file.css`);
+      expect(stubs.del.sync).to.be.calledWith(`${process.cwd()}/test/destination/directory/file.css.map`);
       done();
     });
     plugin.write(transformedFile);

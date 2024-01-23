@@ -48,8 +48,12 @@ function assets() {
       patterns: [
         '**/*',
       ],
-      // Match `.scss` files in the source to `.css` files in the destination.
-      transform: (filename) => filename.replace(/\.scss$/, '.css'),
+      // Match `.scss` files in the source to `.css` and `.css.map` files in
+      // the destination.
+      transforms: [
+        (filename) => filename.replace(/\.scss$/, '.css'),
+        (filename) => filename.replace(/\.scss$/, '.css.map'),
+      ],
     }))
     .pipe(gulp.dest(dest));
 }
