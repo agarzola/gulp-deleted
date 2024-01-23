@@ -17,7 +17,7 @@ const stubs = {
 const deleted = proxyquire('../lib', stubs);
 
 describe('gulp-deleted', () => {
-  let file, nestedFile, options;
+  let file, nestedFile, transformedFile, options;
   beforeEach(() => {
     // Instantiate fresh dummy file and options objects for every test.
     file = new File({
@@ -29,6 +29,11 @@ describe('gulp-deleted', () => {
       cwd: process.cwd(),
       base: '/test/source/',
       path: `${process.cwd()}/test/source/directory/file.jpg`,
+    });
+    transformedFile = new File({
+      cwd: process.cwd(),
+      base: '/test/source/',
+      path: `${process.cwd()}/test/source/file.scss`,
     });
     options = {
       src: 'test/source',
@@ -80,12 +85,31 @@ describe('gulp-deleted', () => {
     plugin.end();
   });
 
+  it('should not delete files that match after filename transformation', done => {
+    const optionsWithFilenameTransform = {
+      ...options,
+      transforms: [
+        (filename) => filename.replace(/\.scss$/, '.css'),
+        (filename) => filename.replace(/\.scss$/, '.css.map'),
+      ],
+    };
+    const plugin = deleted(optionsWithFilenameTransform);
+    plugin.once('end', () => {
+      expect(stubs.del.sync).to.not.be.calledWith(`${process.cwd()}/test/destination/file.css`);
+      expect(stubs.del.sync).to.not.be.calledWith(`${process.cwd()}/test/destination/file.css.map`);
+      expect(stubs.del.sync).to.be.calledWith(`${process.cwd()}/test/destination/directory/file.css`);
+      expect(stubs.del.sync).to.be.calledWith(`${process.cwd()}/test/destination/directory/file.css.map`);
+      done();
+    });
+    plugin.write(transformedFile);
+    plugin.end();
+  });
+
   it('should not delete ignored files', done => {
     options.patterns.push('!directory/deletedFile.jpg');
     const plugin = deleted(options);
     plugin.once('end', () => {
-      expect(stubs.del.sync).to.be.calledOnce;
-      expect(stubs.del.sync).to.be.calledWith(`${process.cwd()}/test/destination/deletedFile.jpg`);
+      expect(stubs.del.sync).to.not.be.calledWith(`${process.cwd()}/test/destination/directory/deletedFile.jpg`);
       done();
     });
     plugin.write(file);
