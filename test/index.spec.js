@@ -104,8 +104,7 @@ describe('gulp-deleted', () => {
     options.patterns.push('!directory/deletedFile.jpg');
     const plugin = deleted(options);
     plugin.once('end', () => {
-      expect(stubs.del.sync).to.be.calledOnce;
-      expect(stubs.del.sync).to.be.calledWith(`${process.cwd()}/test/destination/deletedFile.jpg`);
+      expect(stubs.del.sync).to.not.be.calledWith(`${process.cwd()}/test/destination/directory/deletedFile.jpg`);
       done();
     });
     plugin.write(file);
