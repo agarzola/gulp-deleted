@@ -16,7 +16,7 @@
   },
   "main": "lib/index.js",
   "engines": {
-    "node": ">=20 <25"
+    "node": ">=22 <27"
   },
   "license": {
     "type": "MIT",
